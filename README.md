@@ -13,9 +13,9 @@ The datasets are saved to the [TFIM_datasets](./TFIM_datasets/).
    
 The physical system implementedin this demonstration repository is the **1-D Transverse Field Ising (TFIM) model**    
 Hamiltonian (in Planck units, so $c = G = \hbar = k_B = 1$) reads:
-$$
-H_{\rm TFIM} = -J \left( \sum_{i} S^z_i S^z_{i + 1} + g \sum_i S^x_i \right)
-$$
+```math
+\hat{H}_{\rm TFIM} = -J \left( \sum_{i} \hat{S}^z_i \,\hat{S}^z_{i + 1} + g \sum_i \hat{S}^x_i \right)
+```
 
 ---
 
