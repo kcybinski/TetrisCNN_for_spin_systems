@@ -5,6 +5,8 @@ TetrisCNN for detecting phase transitions
 and order parameters"**
 by K. Cybiński, J. Enouen, A. Georges, and A. Dawid
 
+[![DOI](https://zenodo.org/badge/883192112.svg)](https://doi.org/10.5281/zenodo.14035852)
+
 ---
 
 The data we use are snaphots of various physical 1D systems in the ground state, generated using the [Julia programming language](https://julialang.org).   
