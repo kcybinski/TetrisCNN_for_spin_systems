@@ -5,6 +5,8 @@ TetrisCNN for detecting phase transitions
 and order parameters"**
 by K. Cybiński, J. Enouen, A. Georges, and A. Dawid
 
+[![arXiv](https://img.shields.io/badge/arXiv-2411.02237-b31b1b.svg?style=plastic)](https://arxiv.org/abs/2411.02237)  
+
 [![DOI](https://zenodo.org/badge/883192112.svg)](https://doi.org/10.5281/zenodo.14035852)
 
 ---
