@@ -1,0 +1,68 @@
+# paper.mplstyle
+# Matplotlib style for LaTeX manuscript figures with a Seaborn-like dark grid.
+
+# Figure defaults
+figure.constrained_layout.use: True
+figure.dpi: 300
+savefig.dpi: 500
+savefig.pad_inches: 0.02
+
+# Seaborn darkgrid-like background
+#axes.facecolor: EAEAF2
+#figure.facecolor: white
+#axes.grid: True
+#grid.color: white
+#grid.linestyle: -
+#grid.linewidth: 0.45
+#axes.axisbelow: True
+
+# Clean manuscript style
+axes.facecolor: white
+figure.facecolor: white
+axes.grid: True
+grid.color: E6E6E6
+grid.linewidth: 0.5
+axes.axisbelow: True
+axes.edgecolor: 444444
+
+# Typography
+text.usetex: True
+font.serif: Latin Modern Roman
+text.latex.preamble: \usepackage{amsmath,amssymb,xcolor}
+
+# Manuscript scaling
+font.size: 9
+axes.labelsize: 9
+axes.titlesize: 10
+legend.fontsize: 8
+xtick.labelsize: 8
+ytick.labelsize: 8
+
+# Lines and markers
+axes.linewidth: 0.6
+lines.linewidth: 1.0
+lines.markersize: 2.5
+patch.linewidth: 0.6
+
+# Ticks
+xtick.direction: in
+ytick.direction: in
+xtick.major.size: 2.5
+ytick.major.size: 2.5
+xtick.major.width: 0.5
+ytick.major.width: 0.5
+
+# Legend
+legend.frameon: True
+legend.framealpha: 0.75
+legend.fancybox: True
+legend.borderpad: 0.3
+legend.labelspacing: 0.25
+legend.handlelength: 1.2
+legend.handletextpad: 0.4
+legend.columnspacing: 0.8
+
+# Image/vector export
+pdf.fonttype: 42
+ps.fonttype: 42
+svg.fonttype: none

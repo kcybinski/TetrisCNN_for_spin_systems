@@ -1,0 +1,56 @@
+{
+  "config": {
+    "batch_size": 16,
+    "dataset": "Paris_Ising",
+    "early_stop_min_delta": 1e-05,
+    "early_stop_warmup": 1000,
+    "epochs": 10,
+    "equivariant": false,
+    "even_split": true,
+    "experiment_name": "singlerun",
+    "goodness_str": "r2agg",
+    "hidden_size": 8,
+    "init": "kaiming",
+    "kernel_set": "smallkernels",
+    "label_param": "delta",
+    "lam": -1,
+    "learning_rate": 0.01,
+    "model": "tetriscnn",
+    "normalize_labels": true,
+    "patience": 10,
+    "penalty_params": [
+      10,
+      -5,
+      -1,
+      1
+    ],
+    "samples_per_pt_cap": 10,
+    "seed": 2024,
+    "task": "regression",
+    "weight_decay": 1e-05
+  },
+  "fingerprint": {
+    "train_loss": 0.007793479133397341,
+    "val_goodness": 0.870245099067688,
+    "val_loss": 0.009367788210511208,
+    "z": [
+      -0.03729797899723053,
+      -0.9031661152839661,
+      0.14668062329292297,
+      0.2159889042377472,
+      0.7288733720779419,
+      0.004129549488425255,
+      0.005862348712980747,
+      -0.05796976387500763,
+      0.01842060126364231,
+      0.013633914291858673
+    ]
+  },
+  "versions": {
+    "device": "mps",
+    "numpy": "2.3.5",
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python": "3.11.14 | packaged by conda-forge | (main, Oct 22 2025, 22:56:31) [Clang 19.1.7 ]",
+    "torch": "2.9.1"
+  }
+}

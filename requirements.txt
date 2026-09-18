@@ -1,0 +1,62 @@
+# requirements.txt -- pip-only install path for TetrisCNN.
+#
+# The SUPPORTED install path is conda: `conda env create -f environment.yml` (see that file for
+# the full "why this pin exists" commentary this file mirrors). Use this file only if you are not
+# using conda -- e.g. `python -m venv .venv && pip install -r requirements.txt`.
+#
+# Symbolic regression (PySR, with the Julia runtime it brings, and plotly for its interactive
+# plots) is NOT included: it is an optional, separately run route (sr_toolbox.py). Add it with
+# `pip install -r requirements-sr.txt`, which also documents the Julia side.
+#
+# Tk note: environment.yml also pins conda-forge's `tk` package, which supplies the OS-level
+# Tcl/Tk libraries backing Python's stdlib `tkinter` (used by tetriscnn/utils.py:pick_directory()'s
+# non-notebook directory-picker dialog). There is no pip-installable equivalent -- pip assumes the
+# system Python already has Tk support (true for python.org installers and most Linux distro
+# packages, sometimes false for a from-source build). If `import tkinter` fails, install Tk via
+# your OS package manager (e.g. `brew install tcl-tk` on macOS, `apt install python3-tk` on
+# Debian/Ubuntu) rather than via this file.
+
+# --- Core language / scientific stack ---
+numpy>=2.0            # torch>=2.2 wheels are numpy-2 compatible; older numpy (<2 ABI) is not
+                       # mixed-and-matched here, so this floor is a genuine (not cosmetic) pin
+scipy>=1.13
+pandas>=2.2
+matplotlib>=3.8       # mpl_toolkits (mplot3d, used for the SR 3D generalization plots) ships
+                       # inside the matplotlib package itself -- no separate dependency needed
+scikit-learn>=1.5
+seaborn>=0.13          # used throughout tetriscnn/utils.py, plots.py, symbolic_regression.py
+sympy>=1.13            # equation printing/manipulation in tetriscnn/symbolic_regression.py
+statsmodels>=0.14
+tqdm>=4.66
+typing_extensions      # carried over from the previous env file; no first-party module imports
+                       # it directly today, but it's a common transitive pin for several of the
+                       # above (harmless to keep explicit)
+
+# --- Figure-generation / notebook extras ---
+# Not imported by tetriscnn/ itself, but required to run the repo's *.ipynb figure notebooks and
+# scripts/, which the public-release audit treats as part of "installing the project".
+scikit-image>=0.22     # `from skimage import measure` (marching-cubes / contour extraction) in
+                        # scripts/fig6_surface_survey.py and the Figures5_6_combined_pipeline.ipynb /
+                        # Figure6.ipynb 3D-surface figures; floor is loose since only the
+                        # long-stable `measure` API is used
+ipython>=8.0            # `from IPython.display import Math, display` in the Figure5/Figure6
+                        # notebooks to render LaTeX-typeset symbolic-regression equations inline;
+                        # floor is loose, this API has been stable for many releases
+ipywidgets>=8.0         # optional: Figures5_6_combined_pipeline.ipynb's interactive elev/azim slider for
+                        # picking a 3D view angle. The notebook's own import is try/except-guarded
+                        # and falls back to a static contact sheet if this is absent
+umap-learn>=0.5         # `import umap` -- a hard (non-optional) top-level import in
+                        # FiguresApp_E_clustering.ipynb
+jupyterlab>=4.0         # the `jupyter lab` / `python -m jupyter nbconvert` commands docs/
+                        # NOTEBOOKS.md and the README document for running the figure notebooks;
+                        # pulls in ipykernel and nbconvert. Nothing else here provides `jupyter`.
+
+# --- Deep learning backend ---
+torch>=2.2,<3      # reference environment uses 2.9.1; no first-party code depends on a feature
+                   # newer than what's been available since ~2.2, so the floor is loose. Users who
+                   # need a specific CUDA build should instead follow the install command
+                   # generator at https://pytorch.org/get-started/locally/ and adjust this line
+                   # (or install torch first, then `pip install --no-deps -r requirements.txt`).
+
+# --- File-picker extra ---
+ipyfilechooser>=0.6  # tetriscnn/utils.py:pick_directory()'s Jupyter-notebook code path

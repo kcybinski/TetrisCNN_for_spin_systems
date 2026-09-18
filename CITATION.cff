@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper."
+title: "TetrisCNN"
+abstract: >-
+  Companion code for "TetrisCNN for interpretable detection of phases of matter
+  from experimental quantum simulator data": an interpretable convolutional
+  network whose latent variables admit a reading in terms of spin correlators,
+  applied to Rydberg-array snapshots of two-dimensional Ising and XY models.
+type: software
+license: MIT
+repository-code: "https://github.com/kcybinski/TetrisCNN_for_spin_systems"
+authors:
+  - family-names: "Cybiński"
+    given-names: "Kacper"
+  - family-names: "van Zwol"
+    given-names: "Björn"
+  - family-names: "Enouen"
+    given-names: "James"
+  - family-names: "Bornet"
+    given-names: "Guillaume"
+  - family-names: "Lahaye"
+    given-names: "Thierry"
+  - family-names: "Browaeys"
+    given-names: "Antoine"
+  - family-names: "Georges"
+    given-names: "Antoine"
+  - family-names: "Dawid"
+    given-names: "Anna"
+preferred-citation:
+  type: article
+  title: >-
+    TetrisCNN for interpretable detection of phases of matter from experimental
+    quantum simulator data
+  year: 2026
+  journal: "arXiv preprint"
+  url: "https://arxiv.org/abs/2609.20693"
+  authors:
+    - family-names: "Cybiński"
+      given-names: "Kacper"
+    - family-names: "van Zwol"
+      given-names: "Björn"
+    - family-names: "Enouen"
+      given-names: "James"
+    - family-names: "Bornet"
+      given-names: "Guillaume"
+    - family-names: "Lahaye"
+      given-names: "Thierry"
+    - family-names: "Browaeys"
+      given-names: "Antoine"
+    - family-names: "Georges"
+      given-names: "Antoine"
+    - family-names: "Dawid"
+      given-names: "Anna"

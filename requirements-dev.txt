@@ -1,0 +1,18 @@
+# requirements-dev.txt -- test + lint tooling only.
+#
+# Install on top of either environment.yml's conda env or requirements.txt's pip env:
+#   pip install -r requirements-dev.txt
+#
+# This is deliberately separate from requirements.txt / environment.yml: none of this is imported
+# by tetriscnn/ or needed to run the code, only to develop it.
+
+pytest>=7.0          # runs tests/ (pytest.ini: testpaths=tests, addopts=-q). The suite's three
+                     # custom markers (`data`, `slow`, `accelerator`, declared in pytest.ini) are
+                     # plain markers used for `pytest -m "not slow and not data"` selection --
+                     # they need no plugin, just a pytest recent enough to read pytest.ini's
+                     # `markers =` registration (anything >=7 qualifies); reference env has 9.0.2.
+
+flake8>=7.0          # linter. The reference environment has flake8 (conda-forge), not ruff, so
+                     # this mirrors what's actually verified rather than introducing a second,
+                     # untested linter. No project-local .flake8/setup.cfg exists yet, so this
+                     # runs with flake8's defaults until one is added.

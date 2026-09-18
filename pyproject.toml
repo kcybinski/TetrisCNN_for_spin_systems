@@ -1,0 +1,73 @@
+[build-system]
+# PEP 639 `license = "MIT"` below needs setuptools 77 or newer; an older one silently
+# treats the string as a legacy classifier and warns.
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tetriscnn"
+version = "0.1.0"
+description = "Physics-informed, interpretable CNN with Tetris-shaped convolutional branches for discovering quantum phase transitions from Rydberg-array snapshots"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Kacper Cybiński" },
+    { name = "Björn van Zwol" },
+    { name = "James Enouen" },
+    { name = "Guillaume Bornet" },
+    { name = "Thierry Lahaye" },
+    { name = "Antoine Browaeys" },
+    { name = "Antoine Georges" },
+    { name = "Anna Dawid" },
+]
+
+# Mirrors requirements.txt (see that file for the "why" behind each pin); this list intentionally
+# excludes requirements.txt's `tk` note since Tk is a system library, not a pip package, and
+# excludes requirements-dev.txt's pytest/flake8 (dev-only, not needed to import tetriscnn).
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "pandas>=2.2",
+    "matplotlib>=3.8",
+    "scikit-learn>=1.5",
+    "seaborn>=0.13",
+    "sympy>=1.13",
+    "statsmodels>=0.14",
+    "tqdm>=4.66",
+    "typing_extensions",
+    "scikit-image>=0.22",
+    "ipython>=8.0",
+    "ipywidgets>=8.0",
+    "umap-learn>=0.5",
+    "torch>=2.2,<3",
+    "ipyfilechooser>=0.6",
+]
+
+[project.urls]
+Repository = "https://github.com/kcybinski/TetrisCNN_for_spin_systems"
+Paper = "https://arxiv.org/abs/2609.20693"
+
+[project.optional-dependencies]
+# Symbolic regression (sr_toolbox.py) only; see requirements-sr.txt for the version pin and the
+# Julia runtime PySR bootstraps on first use; plotly draws the SR plots. `pip install -e ".[sr]"`.
+sr = ["pysr>=1.5,<2", "plotly>=5.20", "kaleido>=1"]
+
+[tool.setuptools]
+# Only the importable library package is installed -- notebooks, scripts/, tests/, and the data
+# directories at the repo root are development/analysis artifacts, not part of the installable
+# distribution.
+packages = ["tetriscnn"]
+
+[tool.setuptools.package-data]
+# paper.mplstyle ships inside the package (not a .py module) so PAPER_MPLSTYLE in
+# tetriscnn/__init__.py resolves for a non-editable install too, not just `pip install -e .`.
+tetriscnn = ["paper.mplstyle"]
+
+# NOTE: no [tool.ruff] section here. The linter actually installed in this project's verified
+# reference environment is flake8, not ruff (see requirements-dev.txt) -- flake8 has no
+# pyproject.toml-based config section (it reads setup.cfg/.flake8/tox.ini instead), and no such
+# file exists in this repo yet. If the project later adopts ruff, add a [tool.ruff.lint] with
+# `ignore = ["F403", "F405"]` (main.py / tetriscnn/train.py deliberately use `from x import *`
+# for the experiment-config style -- see README.md -- and must not start erroring) and
+# `line-length = 100`.

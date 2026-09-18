@@ -1,0 +1,38 @@
+# requirements-sr.txt -- the optional symbolic-regression route (sr_toolbox.py, App. I).
+#
+# Symbolic regression is a secondary, post-hoc interpretability route, run separately from
+# training (see docs/SYMBOLIC_REGRESSION.md). Only
+# tetriscnn/symbolic_regression.py (used by sr_toolbox.py) imports PySR and plotly. Training, the
+# primary regression-based interpretation (tetriscnn/interpret.py), the figure notebooks and the
+# tests all work without them, which is why they are kept out of requirements.txt and
+# environment.yml.
+#
+# Install on top of the main environment:
+#   conda:  conda activate tetriscnn && pip install -r requirements-sr.txt
+#   pip:    pip install -r requirements-sr.txt       (also installs requirements.txt)
+#   or, equivalently, `pip install -e ".[sr]"`
+#
+# PySR / Julia: `pysr` is a pure pip package, but it wraps a Julia package
+# (SymbolicRegression.jl) that it does not get from PyPI. The first time any code path imports
+# tetriscnn.symbolic_regression (equivalently, `import pysr`), PySR's `juliacall` bootstraps its
+# own private Julia runtime and instantiates the project, reading this repo's Project.toml /
+# Manifest.toml (the Julia-side dependency set and the Julia version last verified, 1.10.10). No
+# manual Julia install is required, but that first import is slow (Julia download and
+# precompilation) compared to every import after it.
+#
+# Import order: in any script that uses SR, import tetriscnn.symbolic_regression (or pysr) before
+# torch or any torch-based module, so the Julia runtime claims the process's threading/signal
+# setup first. sr_toolbox.py already does this.
+
+-r requirements.txt
+
+pysr>=1.5,<2        # HARD PIN on the major version: tetriscnn/symbolic_regression.py's
+                    # SRConfig.to_base_params() passes PySR keyword arguments (binary_operators,
+                    # complexity_of_variables, elementwise_loss, nested_constraints, ...) whose
+                    # names are tied to PySR's 1.x Python API. A future 2.x could rename or
+                    # restructure these and silently break SR without touching this repo's code.
+plotly>=5.20        # the interactive 3D generalization plots in tetriscnn/symbolic_regression.py
+                    # (plotly.graph_objects, plotly.subplots, plotly.io.to_html)
+kaleido>=1          # plotly's static image export (fig.write_image), used to save the 1D/2D SR plots
+                    # as PNG/PDF. Kaleido 1.x drives a Chrome/Chromium install; if none is found,
+                    # run `plotly_get_chrome` once.
